@@ -5,19 +5,19 @@ suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
 eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae
 consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
-{% if chose("o", "w") %}
+{% if os == "Windows" %}
 
 This is about Windows!
 
-{% if chose("s", "e") %}
+{% if skill == "e" %}
 Since you are an expert, let's talk about all the details.
 {% endif %}
 
-{% elif chose("o", "l") %}
+{% elif os == "Linux" %}
 
 This is about Linux!
 
-{% elif chose("o", "m") %}
+{% elif os == "MacOS" %}
 
 This is about Mac.
 

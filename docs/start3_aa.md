@@ -7,9 +7,11 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 
 
-This is about Mac.
+This is about Windows!
 
-Let's go [talk some more about it](more_omse.md).
+
+Since you are an expert, let's talk about all the details.
+
 
 
 

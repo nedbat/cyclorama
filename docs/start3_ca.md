@@ -9,7 +9,7 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 This is about Mac.
 
-Let's go [talk some more about it](more_omsb.md).
+Let's go [talk some more about it](more_ca.md).
 
 
 
