@@ -19,3 +19,12 @@ voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
 suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
 eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae
 consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
+ 
+ 
+<details>
+<summary>Choices that lead here</summary>
+
+
+- Operating System: **Windows** [Linux](start3_bb.md) [MacOS](start3_cb.md)
+- Skill level: [Expert](start3_aa.md) **Beginner**
+</details>
