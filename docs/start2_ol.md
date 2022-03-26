@@ -1,4 +1,6 @@
+Are you an expert or a beginner?
 
 
-This is about Linux!
 
+- [Expert](start3_olse.md)
+- [Beginner](start3_olsb.md)

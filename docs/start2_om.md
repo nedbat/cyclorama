@@ -1,6 +1,6 @@
+Are you an expert or a beginner?
 
 
-This is about Mac.
 
-Let's go [talk some more about it](more_om.md).
-
+- [Expert](start3_omse.md)
+- [Beginner](start3_omsb.md)

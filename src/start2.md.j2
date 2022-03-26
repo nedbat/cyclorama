@@ -1,15 +1,6 @@
-{% if chose("o", "w") %}
+Are you an expert or a beginner?
 
-This is about Windows!
+{{ choice("Skill level", "s") }}
 
-{% elif chose("o", "l") %}
-
-This is about Linux!
-
-{% elif chose("o", "m") %}
-
-This is about Mac.
-
-Let's go {{ link("talk some more about it", "more.md") }}.
-
-{% endif %}
+- {{ choose("Expert", "start3.md", "s", "e") }}
+- {{ choose("Beginner", "start3.md", "s", "b") }}
