@@ -1,0 +1,9 @@
+{# This is markdown processed by Jinja. #}
+
+Hi! What operating system do you use?
+
+{{ choice("Operating System", "o") }}
+
+- {{ choose("Windows", "start2.md", "o", "w") }}
+- {{ choose("Linux", "start2.md", "o", "l") }}
+- {{ choose("MacOS", "start2.md", "o", "m") }}

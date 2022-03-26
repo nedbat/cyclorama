@@ -1,0 +1,15 @@
+{% if chose("o", "w") %}
+
+This is about Windows!
+
+{% elif chose("o", "l") %}
+
+This is about Linux!
+
+{% elif chose("o", "m") %}
+
+This is about Mac.
+
+Let's go {{ link("talk some more about it", "more.md") }}.
+
+{% endif %}
