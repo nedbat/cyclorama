@@ -25,6 +25,7 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 <summary>Choices that lead here</summary>
 
 
-- Operating System: [Windows](start3_ab.md) [Linux](start3_bb.md) **MacOS**
-- Skill level: [Expert](start3_ca.md) **Beginner**
+<ul><li>Operating System: <a href='start3_ab.md'>Windows</a> <a href='start3_bb.md'>Linux</a> <b>MacOS</b></li>
+<li>Skill level: <a href='start3_ca.md'>Expert</a> <b>Beginner</b></li>
+</ul>
 </details>

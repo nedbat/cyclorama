@@ -10,6 +10,7 @@ Are you an expert or a beginner?
 <summary>Choices that lead here</summary>
 
 
-- Operating System: [Windows](start2_a.md) [Linux](start2_b.md) **MacOS**
-- Skill level: [Expert](start2_ca.md) [Beginner](start2_cb.md)
+<ul><li>Operating System: <a href='start2_a.md'>Windows</a> <a href='start2_b.md'>Linux</a> <b>MacOS</b></li>
+<li>Skill level: <a href='start2_ca.md'>Expert</a> <a href='start2_cb.md'>Beginner</a></li>
+</ul>
 </details>

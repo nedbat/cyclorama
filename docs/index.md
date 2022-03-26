@@ -13,5 +13,6 @@ Hi! What operating system do you use?
 <summary>Choices that lead here</summary>
 
 
-- Operating System: [Windows](index_a.md) [Linux](index_b.md) [MacOS](index_c.md)
+<ul><li>Operating System: <a href='index_a.md'>Windows</a> <a href='index_b.md'>Linux</a> <a href='index_c.md'>MacOS</a></li>
+</ul>
 </details>

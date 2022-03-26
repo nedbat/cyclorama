@@ -5,6 +5,7 @@ Even more stuff about Mac.
 <summary>Choices that lead here</summary>
 
 
-- Operating System: [Windows](more_ab.md) [Linux](more_bb.md) **MacOS**
-- Skill level: [Expert](more_ca.md) **Beginner**
+<ul><li>Operating System: <a href='more_ab.md'>Windows</a> <a href='more_bb.md'>Linux</a> <b>MacOS</b></li>
+<li>Skill level: <a href='more_ca.md'>Expert</a> <b>Beginner</b></li>
+</ul>
 </details>
