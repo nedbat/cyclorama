@@ -76,5 +76,5 @@ class CyoaPageRenderer:
         return self.link_with_choices(text, next_page, self.current_choices)
 
 
-renderer = CyoaRenderer("src", "md")
-renderer.render_pages("start.md")
+renderer = CyoaRenderer("src", "docs")
+renderer.render_pages("index.md")
