@@ -70,22 +70,19 @@ class CyoaPageRenderer:
         out_page = self.renderer.page_name_with_choices(self.page_name, self.current_choices)
         with open(self.renderer.dst_dir / out_page, "w", encoding="utf-8") as f:
             f.write(md)
-            f.write("\n \n \n")
-            f.write("<details>\n<summary>Choices that lead here</summary>\n\n\n")
-            f.write("<ul>")
+            f.write("<br><br><br><hr>\n")
+            f.write("Choices that lead here:\n")
             for var, choice in self.renderer.choices.items():
                 val = self.current_choices.get(var)
-                f.write(f"<li>{choice.label}:")
+                f.write(f"- {choice.label}:")
                 for text, value in choice.choices:
                     if val == value:
-                        f.write(f" <b>{text}</b>")
+                        f.write(f" **{text}**")
                     else:
                         alt_choices = {**self.current_choices, var: value}
                         alt_page = self.renderer.page_name_with_choices(self.page_name, alt_choices)
-                        f.write(f" <a href='{alt_page}'>{text}</a>")
-                f.write("</li>\n")
-            f.write("</ul>\n")
-            f.write("</details>\n")
+                        f.write(f" [{text}]({alt_page})")
+                f.write("\n")
 
         print(f"Wrote {out_page}")
 
