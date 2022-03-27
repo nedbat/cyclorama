@@ -27,14 +27,17 @@ class CyoaRenderer:
         if not self.dst_dir.exists():
             self.dst_dir.mkdir(parents=True)
         self.jenv = jinja2.Environment(loader=jinja2.FileSystemLoader(self.src_dir))
+        self.work = []
 
     def render_pages(self, start_page):
-        todo = [(start_page, {})]
-        while todo:
-            page_name, picks = todo.pop()
+        self.work.append((start_page, {}))
+        while self.work:
+            page_name, picks = self.work.pop()
             cpr = CyoaPageRenderer(page_name, picks, self)
             cpr.render_page()
-            todo.extend(cpr.next_pages)
+
+    def add_page_to_render(self, page_name, picks):
+        self.work.append((page_name, picks))
 
     def picks_slug(self, picks):
         slug = ""
@@ -58,7 +61,6 @@ class CyoaPageRenderer:
         self.page_name = page_name
         self.picks = picks
         self.renderer = renderer
-        self.next_pages = []
 
     def render_page(self):
         template = self.renderer.jenv.get_template(self.page_name + ".j2")
@@ -90,7 +92,7 @@ class CyoaPageRenderer:
         print(f"Wrote {out_page}")
 
     def link_with_picks(self, text, next_page, picks):
-        self.next_pages.append((next_page, picks))
+        self.renderer.add_page_to_render(next_page, picks)
         page_name = self.renderer.page_name_with_picks(next_page, picks)
         return f"[{text}]({page_name})"
 
