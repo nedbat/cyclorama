@@ -11,4 +11,3 @@ Are you an expert or a beginner?
 ------
 Choices that lead here:
 - Operating System: [Windows](start2_a.md) **Linux** [MacOS](start2_c.md)
-- Skill level: [Expert](start2_b.md) [Beginner](start2_b.md)

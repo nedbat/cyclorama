@@ -144,21 +144,28 @@ class WriteFilesPageRenderer(BasePageRenderer):
         out_page = self.renderer.page_name_with_picks(self.page_name, self.picks)
         with open(self.renderer.dst_dir / out_page, "w", encoding="utf-8") as f:
             f.write(md)
-            f.write("\n\n\n\n<br><br><br>\n------\n")
-            f.write("Choices that lead here:\n")
+            f.write("\n")
+            choices = ""
             for var, question in self.renderer.questions.items():
+                if var not in self.renderer.page_vars.get(self.page_name, ()):
+                    continue
                 pick = self.picks.get(var)
-                f.write(f"- {question.text}:")
+                choices += f"- {question.text}:"
                 for text, option in question.options:
                     if pick == option:
-                        f.write(f" **{text}**")
+                        choices += f" **{text}**"
                     else:
                         alt_picks = {**self.picks, var: option}
                         alt_page = self.renderer.page_name_with_picks(
                             self.page_name, alt_picks
                         )
-                        f.write(f" [{text}]({alt_page})")
-                f.write("\n")
+                        choices += f" [{text}]({alt_page})"
+                choices += "\n"
+
+            if choices:
+                f.write("\n\n\n<br><br><br>\n------\n")
+                f.write("Choices that lead here:\n")
+                f.write(choices)
 
         print(f"Wrote {out_page}")
 
