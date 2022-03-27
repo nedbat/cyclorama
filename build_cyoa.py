@@ -3,59 +3,60 @@ from pathlib import Path
 
 import jinja2
 
+# It's too easy to use the word "choice" for everything, so in the code:
+# A decision point for the user is a *question*.  The choices for a question
+# are called *options*.   The options the user has chosen are called *picks*.
+
 
 @dataclass
-class Choice:
+class Question:
     var: str
-    label: str
-    # choices is a list of (text, value).
-    choices: list[tuple[str, str]] = field(default_factory=list)
+    text: str
+    # options is a list of (text, value).
+    options: list[tuple[str, str]] = field(default_factory=list)
 
 
 LETTERS = "abcdefghijklmnopqrstuvwxyz"
+
 
 class CyoaRenderer:
     def __init__(self, src_dir, dst_dir):
         self.src_dir = src_dir
         self.dst_dir = Path(dst_dir)
-        self.choices: dict[str, Choice] = {}
+        self.questions: dict[str, Question] = {}
         if not self.dst_dir.exists():
             self.dst_dir.mkdir(parents=True)
         self.jenv = jinja2.Environment(loader=jinja2.FileSystemLoader(self.src_dir))
 
-    def render_page(self, page_name, current_choices):
-        cpr = CyoaPageRenderer(page_name, current_choices, self)
-        cpr.render_page()
-
     def render_pages(self, start_page):
         todo = [(start_page, {})]
         while todo:
-            page_name, current_choices = todo.pop()
-            cpr = CyoaPageRenderer(page_name, current_choices, self)
+            page_name, picks = todo.pop()
+            cpr = CyoaPageRenderer(page_name, picks, self)
             cpr.render_page()
             todo.extend(cpr.next_pages)
 
-    def choices_slug(self, choices):
+    def picks_slug(self, picks):
         slug = ""
-        for var, choice in self.choices.items():
-            val = choices.get(var)
-            for letter, (_, value) in zip(LETTERS, choice.choices):
-                if value == val:
+        for var, question in self.questions.items():
+            pick = picks.get(var)
+            for letter, (_, option) in zip(LETTERS, question.options):
+                if pick == option:
                     slug += letter
                     break
         return slug
 
-    def page_name_with_choices(self, page, choices):
-        slug = self.choices_slug(choices)
+    def page_name_with_picks(self, page, picks):
+        slug = self.picks_slug(picks)
         if slug:
             page = page.replace(".md", f"_{slug}.md")
         return page
 
 
 class CyoaPageRenderer:
-    def __init__(self, page_name, current_choices, renderer):
+    def __init__(self, page_name, picks, renderer):
         self.page_name = page_name
-        self.current_choices = current_choices
+        self.picks = picks
         self.renderer = renderer
         self.next_pages = []
 
@@ -65,49 +66,51 @@ class CyoaPageRenderer:
         vars.update(
             {m[2:]: getattr(self, m) for m in dir(self.__class__) if m[:2] == "j_"}
         )
-        vars.update(self.current_choices)
+        vars.update(self.picks)
         md = template.render(vars)
-        out_page = self.renderer.page_name_with_choices(self.page_name, self.current_choices)
+        out_page = self.renderer.page_name_with_picks(self.page_name, self.picks)
         with open(self.renderer.dst_dir / out_page, "w", encoding="utf-8") as f:
             f.write(md)
             f.write("\n\n\n\n<br><br><br>\n------\n")
             f.write("Choices that lead here:\n")
-            for var, choice in self.renderer.choices.items():
-                val = self.current_choices.get(var)
-                f.write(f"- {choice.label}:")
-                for text, value in choice.choices:
-                    if val == value:
+            for var, question in self.renderer.questions.items():
+                pick = self.picks.get(var)
+                f.write(f"- {question.text}:")
+                for text, option in question.options:
+                    if pick == option:
                         f.write(f" **{text}**")
                     else:
-                        alt_choices = {**self.current_choices, var: value}
-                        alt_page = self.renderer.page_name_with_choices(self.page_name, alt_choices)
+                        alt_picks = {**self.picks, var: option}
+                        alt_page = self.renderer.page_name_with_picks(
+                            self.page_name, alt_picks
+                        )
                         f.write(f" [{text}]({alt_page})")
                 f.write("\n")
 
         print(f"Wrote {out_page}")
 
-    def link_with_choices(self, text, next_page, choices):
-        self.next_pages.append((next_page, choices))
-        page_name = self.renderer.page_name_with_choices(next_page, choices)
+    def link_with_picks(self, text, next_page, picks):
+        self.next_pages.append((next_page, picks))
+        page_name = self.renderer.page_name_with_picks(next_page, picks)
         return f"[{text}]({page_name})"
 
     # Methods named j_* become Jinja globals.
-    def j_choice(self, label, var):
-        self.renderer.choices[var] = Choice(var=var, label=label)
-        assert var not in self.current_choices
-        self.current_choices[var] = None
+    def j_choice(self, text, var):
+        self.renderer.questions[var] = Question(var=var, text=text)
+        assert var not in self.picks
+        self.picks[var] = None
         return ""
 
     def j_choose(self, var, text, next_page, value=None):
-        assert self.current_choices[var] is None
+        assert self.picks[var] is None
         if value is None:
             value = text
-        self.renderer.choices[var].choices.append((text, value))
-        next_choices = {**self.current_choices, var: value}
-        return self.link_with_choices(text, next_page, next_choices)
+        self.renderer.questions[var].options.append((text, value))
+        next_picks = {**self.picks, var: value}
+        return self.link_with_picks(text, next_page, next_picks)
 
     def j_link(self, text, next_page):
-        return self.link_with_choices(text, next_page, self.current_choices)
+        return self.link_with_picks(text, next_page, self.picks)
 
 
 renderer = CyoaRenderer("src", "docs")
