@@ -13,4 +13,5 @@ Hi! What operating system do you use?
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](index_a.md) [Linux](index_b.md) [MacOS](index_c.md)
+- Operating System: [Windows](index.md) [Linux](index.md) [MacOS](index.md)
+- Skill level: [Expert](index.md) [Beginner](index.md)
