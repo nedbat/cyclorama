@@ -6,7 +6,7 @@ import jinja2
 
 # It's too easy to use the word "choice" for everything, so in the code:
 # A decision point for the user is a *question*.  The choices for a question
-# are called *options*.   The options the user has chosen are called *picks*.
+# are *options*.   The options the user has chosen are *picks*.
 
 
 @dataclass
