@@ -26,4 +26,4 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 ------
 Choices that lead here:
 - Operating System: [Windows](start3_aa.md) [Linux](start3_ba.md) **MacOS**
-- Skill level: **Expert** [Beginner](start3_cb.md)
+- Depth: **Details** [Instructions](start3_cb.md)

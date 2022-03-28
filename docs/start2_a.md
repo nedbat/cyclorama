@@ -1,9 +1,9 @@
-Are you an expert or a beginner?
+Do you like lots of details, or do you just want instructions?
 
 
 
-- [Expert](start3_aa.md)
-- [Beginner](start3_ab.md)
+- [Details](start3_aa.md)
+- [Instructions](start3_ab.md)
 
 
 

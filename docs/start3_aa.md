@@ -10,7 +10,8 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 This is about Windows!
 
 
-Since you are an expert, let's talk about all the details.
+Here are all of the details: lorem ipsum quia dolor sit amet consectetur
+adipisci velit, sed quia non numquam eius modi tempora incidunt.
 
 
 
@@ -28,4 +29,4 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 ------
 Choices that lead here:
 - Operating System: **Windows** [Linux](start3_ba.md) [MacOS](start3_ca.md)
-- Skill level: **Expert** [Beginner](start3_ab.md)
+- Depth: **Details** [Instructions](start3_ab.md)
