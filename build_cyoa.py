@@ -44,7 +44,7 @@ class Renderer:
             renderer_class(page_name, picks, self).render_page()
 
     def render_pages(self, start_page):
-        self._render_all_pages(start_page, AnalysisPageRenderer)
+        self._render_all_pages(start_page, PageAnalyzer)
 
         while True:
             old_page_vars = copy.deepcopy(self.page_vars)
@@ -58,7 +58,7 @@ class Renderer:
             if old_page_vars == self.page_vars:
                 break
 
-        self._render_all_pages(start_page, WriteFilesPageRenderer)
+        self._render_all_pages(start_page, PageWriter)
 
     def add_page_to_render(self, page_name, picks):
         self.work.append((page_name, picks))
@@ -78,7 +78,7 @@ class Renderer:
         return page
 
 
-class TracerString:
+class TrackingString:
     def __init__(self, var, value, tracker):
         self.var = var
         self.value = value
@@ -89,7 +89,7 @@ class TracerString:
         return self.value == other
 
 
-class BasePageRenderer:
+class BasePageVisitor:
     def __init__(self, page_name, picks, renderer):
         self.page_name = page_name
         self.picks = picks
@@ -103,7 +103,7 @@ class BasePageRenderer:
         )
         tracker = self.renderer.page_vars.setdefault(self.page_name, set())
         vars.update(
-            {var: TracerString(var, val, tracker) for var, val in self.picks.items()}
+            {var: TrackingString(var, val, tracker) for var, val in self.picks.items()}
         )
         md = template.render(vars)
         return md
@@ -134,11 +134,11 @@ class BasePageRenderer:
         return self.link_with_picks(text, next_page, self.picks)
 
 
-class AnalysisPageRenderer(BasePageRenderer):
+class PageAnalyzer(BasePageVisitor):
     pass
 
 
-class WriteFilesPageRenderer(BasePageRenderer):
+class PageWriter(BasePageVisitor):
     def render_page(self):
         md = super().render_page()
         out_page = self.renderer.page_name_with_picks(self.page_name, self.picks)
