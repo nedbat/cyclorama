@@ -88,6 +88,10 @@ class TrackingString:
         self.tracker.add(self.var)
         return self.value == other
 
+    def __ne__(self, other):
+        self.tracker.add(self.var)
+        return self.value != other
+
 
 class BasePageVisitor:
     def __init__(self, page_name, picks, renderer):
