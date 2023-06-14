@@ -93,6 +93,9 @@ class TrackingString:
         self.value = value
         self.tracker = tracker
 
+    def __str__(self):
+        return self.value
+
     def __eq__(self, other):
         self.tracker.add(self.var)
         return self.value == other
