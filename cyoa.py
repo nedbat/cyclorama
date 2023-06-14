@@ -120,14 +120,14 @@ class BasePageVisitor:
         return "LINK GOES HERE"
 
     # Methods named j_* become Jinja globals.
-    def j_choice(self, text, var):
+    def j_question(self, text, var):
         self.renderer.questions[var] = Question(var=var, text=text)
         self.renderer.page_questions[self.page_name] = var
         assert var not in self.picks
         self.picks[var] = None
         return ""
 
-    def j_choose(self, var, text, next_page, value=None):
+    def j_option(self, var, text, next_page, value=None):
         assert self.picks[var] is None
         if value is None:
             value = text
