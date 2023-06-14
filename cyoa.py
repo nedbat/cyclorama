@@ -1,4 +1,5 @@
 import copy
+import traceback
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -9,6 +10,10 @@ import jinja2
 # A decision point for the user is a *question*.  The choices for a question
 # are *options*.   The options the user has chosen are *picks*.
 
+
+def exc_summary(exc):
+    """Return a one-line summary of an exception."""
+    return "".join(traceback.format_exception_only(exc)).strip()
 
 @dataclass
 class Question:
@@ -42,7 +47,10 @@ class Renderer:
         self.work = [(start_page, {})]
         while self.work:
             page_name, picks = self.work.pop()
-            renderer_class(page_name, picks, self).render_page()
+            try:
+                renderer_class(page_name, picks, self).render_page()
+            except Exception as exc:
+                print(f"Couldn't render {page_name}: {exc_summary(exc)}")
 
     def render_pages(self, start_page):
         self._render_all_pages(start_page, PageAnalyzer)
