@@ -2,6 +2,7 @@ import copy
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import click
 import jinja2
 
 # It's too easy to use the word "choice" for everything, so in the code:
@@ -179,5 +180,17 @@ class PageWriter(BasePageVisitor):
         return f"[{text}]({page_name})"
 
 
-renderer = Renderer("src", "docs")
-renderer.render_pages("index.md")
+
+@click.group()
+def cli():
+    pass
+
+@cli.command(help="Render src/START_PAGE.j2 to docs/START_PAGE, and all pages it references")
+@click.argument("start_page", type=str, required=True)
+def render(start_page):
+    renderer = Renderer("src", "docs")
+    renderer.render_pages(start_page)
+
+
+if __name__ == "__main__":
+    cli()
