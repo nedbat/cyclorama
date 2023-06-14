@@ -14,3 +14,4 @@ requirements: ## install Python requirements
 
 build: ## compile the Markdown docs
 	python cyoa.py render index.md
+	python cyoa.py render cant-import.md

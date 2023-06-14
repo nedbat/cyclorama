@@ -1,0 +1,19 @@
+{% if os == "Windows" %}
+
+Open a cmd or Powershell window and run the following command:
+```
+py -0p
+```
+
+In the output, how many Python versions are listed?
+
+{{ question("Number of Pythons", "num_pythons") }}
+
+- {{ option("num_pythons", "Just one", "ci-fix-vscode.md") }}
+- {{ option("num_pythons", "More than one", "ci-fix-vscode.md") }}
+
+{% else %}
+
+    Sorry, we haven't written the steps for {{ os }} yet.
+
+{% endif %}
