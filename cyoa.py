@@ -113,22 +113,18 @@ class BasePageVisitor:
 
     def render_page(self):
         template = self.renderer.jenv.get_template(self.page_name + ".j2")
-        vars = {}
-        vars.update(
-            {m[2:]: getattr(self, m) for m in dir(self.__class__) if m[:2] == "j_"}
-        )
         tracker = self.renderer.page_vars.setdefault(self.page_name, set())
-        vars.update(
-            {var: TrackingString(var, val, tracker) for var, val in self.picks.items()}
-        )
-        md = template.render(vars)
-        return md
+        vars = {
+            **{m[2:]: getattr(self, m) for m in dir(self.__class__) if m[:2] == "j_"},
+            **{var: TrackingString(var, val, tracker) for var, val in self.picks.items()},
+        }
+        return template.render(vars)
 
     def link_with_picks(self, text, next_page, picks):
+        raise NotImplementedError()
+
+    def add_page_to_render(self, next_page, picks):
         self.renderer.add_page_to_render(next_page, picks)
-        self.renderer.page_links.setdefault(next_page, set()).add(self.page_name)
-        # While collecting variables, we don't use the markdown, so any text is fine.
-        return "LINK GOES HERE"
 
     # Methods named j_* become Jinja globals.
     def j_question(self, text, var):
@@ -151,7 +147,11 @@ class BasePageVisitor:
 
 
 class PageAnalyzer(BasePageVisitor):
-    pass
+    def link_with_picks(self, text, next_page, picks):
+        self.add_page_to_render(next_page, picks)
+        self.renderer.page_links.setdefault(next_page, set()).add(self.page_name)
+        # While collecting variables, we don't use the markdown, so any text is fine.
+        return "LINK GOES HERE"
 
 
 class PageWriter(BasePageVisitor):
@@ -186,7 +186,7 @@ class PageWriter(BasePageVisitor):
         print(f"Wrote {out_page}")
 
     def link_with_picks(self, text, next_page, picks):
-        self.renderer.add_page_to_render(next_page, picks)
+        self.add_page_to_render(next_page, picks)
         page_name = self.renderer.page_name_with_picks(next_page, picks)
         return f"[{text}]({page_name})"
 
