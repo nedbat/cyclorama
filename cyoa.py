@@ -127,7 +127,15 @@ class BasePageVisitor:
         self.renderer.add_page_to_render(next_page, picks)
 
     # Methods named j_* become Jinja globals.
+
     def j_question(self, text, var):
+        """Define a question.
+
+        `text` will be used in breadcrumbs as a short-hand of the question.
+        `var` is the name of the Jinja variable that will be defined.
+
+        Values for `var` will be defined with ``option()`` later on the page.
+        """
         self.renderer.questions[var] = Question(var=var, text=text)
         self.renderer.page_questions[self.page_name] = var
         assert var not in self.picks
@@ -135,6 +143,14 @@ class BasePageVisitor:
         return ""
 
     def j_option(self, var, text, next_page, value=None):
+        """Present an option to question.
+
+        `var` is the variable from a previous ``question()``.
+        `text` is the text of the link.
+        `next_page` is the .md base name of the page to go to for this option.
+        `value` is the value of the variable to set. If not provided, `text` will
+        be used.
+        """
         assert self.picks[var] is None
         if value is None:
             value = text
@@ -143,6 +159,11 @@ class BasePageVisitor:
         return self.link_with_picks(text, next_page, next_picks)
 
     def j_link(self, text, next_page):
+        """Generate a link to a page that keeps the current choices.
+
+        `text` is the text that will appear on the current page.
+        `next_page` is the base name of the .md file to link to.
+        """
         return self.link_with_picks(text, next_page, self.picks)
 
 
