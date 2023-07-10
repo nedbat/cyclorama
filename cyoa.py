@@ -19,11 +19,8 @@ def exc_summary(exc):
 class Question:
     var: str
     text: str
-    # options is a list of (text, value).
-    options: list[tuple[str, str]] = field(default_factory=list)
-
-
-LETTERS = "abcdefghijklmnopqrst"
+    # options maps value to text.
+    options: dict[str, str] = field(default_factory=dict)
 
 
 class Renderer:
@@ -78,23 +75,28 @@ class Renderer:
         for var, question in self.questions.items():
             if var in page_vars:
                 pick = picks.get(var)
-                for letter, (_, option) in zip(LETTERS, question.options):
-                    if pick == option:
-                        slug += letter
-                        break
+                slug += f"_{var}{pick}"
         if slug:
-            page = page.replace(".md", f"_{slug}.md")
+            page = page.replace(".md", f"{slug}.md")
         return page
 
 
 class TrackingString:
-    def __init__(self, var, value, tracker):
+    """A variable for use in Jinja.
+
+    When used as a string ``{{ var }}``, it shows the full text of the user's
+    pick.  When use in comparison ``{% if var == "x" %}``, it compares against
+    the short value.
+
+    """
+    def __init__(self, var, text, value, tracker):
         self.var = var
+        self.text = text
         self.value = value
         self.tracker = tracker
 
     def __str__(self):
-        return self.value
+        return self.text
 
     def __eq__(self, other):
         self.tracker.add(self.var)
@@ -114,11 +116,16 @@ class BasePageVisitor:
     def render_page(self):
         template = self.renderer.jenv.get_template(self.page_name + ".j2")
         tracker = self.renderer.page_vars.setdefault(self.page_name, set())
-        vars = {
-            **{m[2:]: getattr(self, m) for m in dir(self.__class__) if m[:2] == "j_"},
-            **{var: TrackingString(var, val, tracker) for var, val in self.picks.items()},
+        jinja_methods = {
+            m[2:]: getattr(self, m)
+            for m in dir(self.__class__)
+            if m[:2] == "j_"
         }
-        return template.render(vars)
+        variables = {
+            var: TrackingString(var, self.renderer.questions[var].options[val], val, tracker)
+            for var, val in self.picks.items()
+        }
+        return template.render({ **jinja_methods, **variables })
 
     def link_with_picks(self, text, next_page, picks):
         raise NotImplementedError()
@@ -154,7 +161,7 @@ class BasePageVisitor:
         assert self.picks[var] is None
         if value is None:
             value = text
-        self.renderer.questions[var].options.append((text, value))
+        self.renderer.questions[var].options[value] = text
         next_picks = {**self.picks, var: value}
         return self.link_with_picks(text, next_page, next_picks)
 
@@ -188,7 +195,7 @@ class PageWriter(BasePageVisitor):
                     continue
                 pick = self.picks.get(var)
                 choices += f"- {question.text}:"
-                for text, option in question.options:
+                for option, text in question.options.items():
                     if pick == option:
                         choices += f" **{text}**"
                     else:

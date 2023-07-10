@@ -13,10 +13,3 @@ on the bottom-most bar in the editor, and selecting the latest (that is, the
 highest version) Python interpreter from the list.
 
 
-
-
-
-<br><br><br>
-------
-Choices that lead here:
-- Number of Pythons: [Just one](ci-fix-vscode_a.md) **More than one**

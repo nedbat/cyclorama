@@ -1,4 +1,4 @@
-{% if os == "Windows" %}
+{% if os == "w" %}
 
 Open a cmd or Powershell window and run the following command:
 ```
@@ -7,13 +7,13 @@ py -0p
 
 In the output, how many Python versions are listed?
 
-{{ question("Number of Pythons", "num_pythons") }}
+{{ question("Number of Pythons", "npy") }}
 
-- {{ option("num_pythons", "Just one", "ci-fix-vscode.md") }}
-- {{ option("num_pythons", "More than one", "ci-fix-vscode.md") }}
+- {{ option("npy", "Just one", "ci-fix-vscode.md", value="one") }}
+- {{ option("npy", "More than one", "ci-fix-vscode.md", value="more") }}
 
 {% else %}
 
-    Sorry, we haven't written the steps for {{ os }} yet.
+Sorry, we haven't written the steps for {{ os }} yet.
 
 {% endif %}

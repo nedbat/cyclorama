@@ -6,6 +6,6 @@ What operating system are you using?
 
 
 
-- [Windows](cant-import2_a.md)
-- [Linux](cant-import2_b.md)
-- [MacOS](cant-import2_c.md)
+- [Windows](cant-import2_osw.md)
+- [Linux](cant-import2_osl.md)
+- [MacOS](cant-import2_osm.md)

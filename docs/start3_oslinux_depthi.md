@@ -7,9 +7,7 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 
 
-This is about Mac.
-
-Let's go [talk some more about it](more.md).
+This is about Linux!
 
 
 
@@ -25,5 +23,5 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](start3_aa.md) [Linux](start3_ba.md) **MacOS**
-- Depth: **Details** [Instructions](start3_cb.md)
+- Operating System: [Windows](start3_oswin_depthi.md) **Linux** [MacOS](start3_osmac_depthi.md)
+- Depth: [Details](start3_oslinux_depthd.md) **Instructions**

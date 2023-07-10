@@ -3,7 +3,7 @@ What editor are you using?
 
 
 - [PyCharm](ci-pycharm.md)
-- [VSCode](ci-vscode_c.md)
+- [VSCode](ci-vscode_osl.md)
 - [Something else](ci-no-help.md)
 
 
@@ -11,4 +11,4 @@ What editor are you using?
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](cant-import2_a.md) [Linux](cant-import2_b.md) **MacOS**
+- Operating System: [Windows](cant-import2_osw.md) **Linux** [MacOS](cant-import2_osm.md)

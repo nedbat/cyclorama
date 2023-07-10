@@ -1,7 +1,7 @@
 What editor are you using?
 
-{{ question("Editor", "editor") }}
+{{ question("Editor", "ed") }}
 
-- {{ option("editor", "PyCharm", "ci-pycharm.md") }}
-- {{ option("editor", "VSCode", "ci-vscode.md") }}
-- {{ option("editor", "Something else", "ci-no-help.md") }}
+- {{ option("ed", "PyCharm", "ci-pycharm.md", value="pych") }}
+- {{ option("ed", "VSCode", "ci-vscode.md", value="vsc") }}
+- {{ option("ed", "Something else", "ci-no-help.md") }}

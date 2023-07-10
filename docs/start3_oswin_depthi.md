@@ -7,7 +7,9 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 
 
-This is about Linux!
+This is about Windows!
+
+
 
 
 
@@ -23,5 +25,5 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](start3_ab.md) **Linux** [MacOS](start3_cb.md)
-- Depth: [Details](start3_ba.md) **Instructions**
+- Operating System: **Windows** [Linux](start3_oslinux_depthi.md) [MacOS](start3_osmac_depthi.md)
+- Depth: [Details](start3_oswin_depthd.md) **Instructions**

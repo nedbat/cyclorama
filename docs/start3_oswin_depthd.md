@@ -7,7 +7,12 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 
 
-This is about Linux!
+This is about Windows!
+
+
+Here are all of the details: lorem ipsum quia dolor sit amet consectetur
+adipisci velit, sed quia non numquam eius modi tempora incidunt.
+
 
 
 
@@ -23,5 +28,5 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](start3_aa.md) **Linux** [MacOS](start3_ca.md)
-- Depth: **Details** [Instructions](start3_bb.md)
+- Operating System: **Windows** [Linux](start3_oslinux_depthd.md) [MacOS](start3_osmac_depthd.md)
+- Depth: **Details** [Instructions](start3_oswin_depthi.md)

@@ -4,6 +4,6 @@ Hi! What operating system do you use?
 
 
 
-- [Windows](start2_a.md)
-- [Linux](start2_b.md)
-- [MacOS](start2_c.md)
+- [Windows](start2_oswin.md)
+- [Linux](start2_oslinux.md)
+- [MacOS](start2_osmac.md)
