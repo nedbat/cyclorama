@@ -13,5 +13,5 @@ requirements: ## install Python requirements
 	pip install -r requirements.txt
 
 build: ## compile the Markdown docs
-	python cyoa.py render index.md
-	python cyoa.py render cant-import.md
+	python cyoa.py render src/index.md.j2 docs
+	python cyoa.py render src/cant-import.md.j2 docs
