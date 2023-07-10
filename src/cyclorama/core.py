@@ -3,7 +3,6 @@ import traceback
 from dataclasses import dataclass, field
 from pathlib import Path
 
-import click
 import jinja2
 
 # It's too easy to use the word "choice" for everything, so in the code:
@@ -218,22 +217,3 @@ class PageWriter(BasePageVisitor):
         page_name = self.renderer.page_name_with_picks(next_page, picks)
         return f"[{text}]({page_name})"
 
-
-
-@click.group()
-def cli():
-    pass
-
-@cli.command(help="Render START_PAGE.j2 to OUT_DIR, and all pages it references")
-@click.argument("start_page", type=Path, required=True)
-@click.argument("out_dir", type=Path, required=True)
-def render(start_page, out_dir):
-    print(f"{start_page.suffix = }")
-    if start_page.suffix != ".j2":
-        raise Exception("START_PAGE should be a .j2 file")
-    renderer = Renderer(start_page.parent, out_dir)
-    renderer.render_pages(start_page.stem)
-
-
-if __name__ == "__main__":
-    cli()
