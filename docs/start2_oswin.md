@@ -10,4 +10,4 @@ Do you like lots of details, or do you just want instructions?
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: **Windows** | [Linux](start2_oslinux.md) | [MacOS](start2_osmac.md)
+- Operating System: **Windows** \| [Linux](start2_oslinux.md) \| [MacOS](start2_osmac.md)

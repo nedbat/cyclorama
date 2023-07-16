@@ -19,4 +19,4 @@ In the output, how many Python versions are listed?
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: **Windows** | [Linux](ci-vscode_osl.md) | [MacOS](ci-vscode_osm.md)
+- Operating System: **Windows** \| [Linux](ci-vscode_osl.md) \| [MacOS](ci-vscode_osm.md)

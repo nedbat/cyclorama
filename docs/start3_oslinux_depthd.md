@@ -23,5 +23,5 @@ consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](start3_oswin_depthd.md) | **Linux** | [MacOS](start3_osmac_depthd.md)
-- Depth: **Details** | [Instructions](start3_oslinux_depthi.md)
+- Operating System: [Windows](start3_oswin_depthd.md) \| **Linux** \| [MacOS](start3_osmac_depthd.md)
+- Depth: **Details** \| [Instructions](start3_oslinux_depthi.md)

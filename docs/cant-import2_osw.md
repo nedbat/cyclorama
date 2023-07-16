@@ -11,4 +11,4 @@ What editor are you using?
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: **Windows** | [Linux](cant-import2_osl.md) | [MacOS](cant-import2_osm.md)
+- Operating System: **Windows** \| [Linux](cant-import2_osl.md) \| [MacOS](cant-import2_osm.md)

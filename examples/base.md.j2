@@ -9,7 +9,7 @@ Choices that lead here:
 {%- for qu in page_questions %}
 - {{ qu.question }}: {# -#}
 {%- for opt in qu.options -%}
-    {%- if not loop.first %} | {% endif -%}
+    {%- if not loop.first %} \| {% endif -%}
     {%- if opt.picked %}**{{ opt.text }}**
     {%- else %}[{{ opt.text }}]({{ opt.alt_page }})
     {%- endif -%}
