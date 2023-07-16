@@ -1,3 +1,5 @@
+{% extends "base.md.j2" %}
+{% block content %}
 {% if os == "w" %}
 
 Open a cmd or Powershell window and run the following command:
@@ -17,3 +19,5 @@ In the output, how many Python versions are listed?
 Sorry, we haven't written the steps for {{ os }} yet.
 
 {% endif %}
+
+{% endblock %}

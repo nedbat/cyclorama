@@ -1,3 +1,5 @@
+{% extends "base.md.j2" %}
+{% block content %}
 What editor are you using?
 
 {{ question("Editor", "ed") }}
@@ -5,3 +7,5 @@ What editor are you using?
 - {{ option("ed", "PyCharm", "ci-pycharm.md", value="pych") }}
 - {{ option("ed", "VSCode", "ci-vscode.md", value="vsc") }}
 - {{ option("ed", "Something else", "ci-no-help.md") }}
+
+{% endblock %}

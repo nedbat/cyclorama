@@ -1,4 +1,6 @@
 {# This is markdown processed by Jinja. #}
+{% extends "base.md.j2" %}
+{% block content %}
 
 Hi! What operating system do you use?
 
@@ -7,3 +9,5 @@ Hi! What operating system do you use?
 - {{ option("os", "Windows", "start2.md", value="win") }}
 - {{ option("os", "Linux", "start2.md", value="linux") }}
 - {{ option("os", "MacOS", "start2.md", value="mac") }}
+
+{% endblock %}

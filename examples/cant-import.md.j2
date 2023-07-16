@@ -1,3 +1,5 @@
+{% extends "base.md.j2" %}
+{% block content %}
 These pages will help you solve problems importing a module that you've
 installed.  We'll ask for information about your situation that will guide you
 along the way.
@@ -9,3 +11,5 @@ What operating system are you using?
 - {{ option("os", "Windows", "cant-import2.md", value="w") }}
 - {{ option("os", "Linux", "cant-import2.md", value="l") }}
 - {{ option("os", "MacOS", "cant-import2.md", value="m") }}
+
+{% endblock %}

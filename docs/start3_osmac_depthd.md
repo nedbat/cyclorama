@@ -1,3 +1,4 @@
+
 lorem ipsum quia dolor sit amet consectetur adipisci velit, sed quia non numquam
 eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat
 voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
@@ -21,9 +22,8 @@ eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae
 consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur.
 
 
-
 <br><br><br>
 ------
 Choices that lead here:
-- Operating System: [Windows](start3_oswin_depthd.md) [Linux](start3_oslinux_depthd.md) **MacOS**
-- Depth: **Details** [Instructions](start3_osmac_depthi.md)
+- Operating System: [Windows](start3_oswin_depthd.md) | [Linux](start3_oslinux_depthd.md) | **MacOS**
+- Depth: **Details** | [Instructions](start3_osmac_depthi.md)

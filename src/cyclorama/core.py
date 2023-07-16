@@ -112,7 +112,7 @@ class BasePageVisitor:
         self.picks = picks
         self.renderer = renderer
 
-    def render_page(self):
+    def render_page(self, **kwargs):
         template = self.renderer.jenv.get_template(self.page_name + ".j2")
         tracker = self.renderer.page_vars.setdefault(self.page_name, set())
         jinja_methods = {
@@ -124,7 +124,7 @@ class BasePageVisitor:
             var: TrackingString(var, self.renderer.questions[var].options[val], val, tracker)
             for var, val in self.picks.items()
         }
-        return template.render({ **jinja_methods, **variables })
+        return template.render({ **jinja_methods, **variables, **kwargs })
 
     def link_with_picks(self, text, next_page, picks):
         raise NotImplementedError()
@@ -183,32 +183,28 @@ class PageAnalyzer(BasePageVisitor):
 
 class PageWriter(BasePageVisitor):
     def render_page(self):
-        md = super().render_page()
+        page_questions = []
+        for var, question in self.renderer.questions.items():
+            if var not in self.renderer.page_vars.get(self.page_name, ()):
+                continue
+            options = []
+            page_questions.append({'question': question.text, 'options': options})
+            pick = self.picks.get(var)
+            for option, text in question.options.items():
+                picked = pick == option
+                options.append({'text': text, 'picked': picked})
+                if not picked:
+                    alt_picks = {**self.picks, var: option}
+                    alt_page = self.renderer.page_name_with_picks(
+                        self.page_name, alt_picks
+                    )
+                    options[-1]["alt_page"] = alt_page
+
+        md = super().render_page(page_questions=page_questions)
+
         out_page = self.renderer.page_name_with_picks(self.page_name, self.picks)
         with open(self.renderer.dst_dir / out_page, "w", encoding="utf-8") as f:
             f.write(md)
-            f.write("\n")
-            choices = ""
-            for var, question in self.renderer.questions.items():
-                if var not in self.renderer.page_vars.get(self.page_name, ()):
-                    continue
-                pick = self.picks.get(var)
-                choices += f"- {question.text}:"
-                for option, text in question.options.items():
-                    if pick == option:
-                        choices += f" **{text}**"
-                    else:
-                        alt_picks = {**self.picks, var: option}
-                        alt_page = self.renderer.page_name_with_picks(
-                            self.page_name, alt_picks
-                        )
-                        choices += f" [{text}]({alt_page})"
-                choices += "\n"
-
-            if choices:
-                f.write("\n\n\n<br><br><br>\n------\n")
-                f.write("Choices that lead here:\n")
-                f.write(choices)
 
         print(f"Wrote {out_page}")
 

@@ -1,6 +1,10 @@
+{% extends "base.md.j2" %}
+{% block content %}
 Do you like lots of details, or do you just want instructions?
 
 {{ question("Depth", "depth") }}
 
 - {{ option("depth", "Details", "start3.md", value="d") }}
 - {{ option("depth", "Instructions", "start3.md", value="i") }}
+
+{% endblock %}
